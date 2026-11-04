@@ -819,7 +819,7 @@ $browse_result = mysqli_query($conn, $sql);
 
 
 
-
+        /* 
 
 
         .message-action-card {
@@ -886,7 +886,7 @@ $browse_result = mysqli_query($conn, $sql);
             cursor: pointer;
             font-weight: 600;
             font-family: inherit;
-        }
+        } */
     </style>
 </head>
 
@@ -1965,49 +1965,56 @@ $browse_result = mysqli_query($conn, $sql);
 
                                         <?php if ($status === 'Pending'): ?>
 
-                                            <!-- APPROVE RENTAL -->
-                                            <form action="manage_rental.php" method="POST">
+                                            <!-- RENTAL ACTIONS -->
+                                            <div style="display:flex; flex-direction:column; gap:8px; width:170px;">
 
-                                                <input type="hidden" name="id"
-                                                    value="<?= (int)$row['id']; ?>">
+                                                <!-- APPROVE RENTAL -->
+                                                <form action="manage_rental.php" method="POST"
+                                                    style="width:100%; display:flex; flex-direction:column;">
 
-                                                <input type="hidden" name="action"
-                                                    value="approve">
+                                                    <input type="hidden" name="id"
+                                                        value="<?= (int)$row['id']; ?>">
 
-                                                <input type="hidden" name="csrf_token"
-                                                    value="<?= htmlspecialchars($_SESSION['csrf_token']); ?>">
+                                                    <input type="hidden" name="action"
+                                                        value="approve">
 
-                                                <textarea name="pre_condition"
-                                                    placeholder="Tool condition before rental"
-                                                    required
-                                                    style="width:160px;padding:5px;margin-bottom:5px;"></textarea>
+                                                    <input type="hidden" name="csrf_token"
+                                                        value="<?= htmlspecialchars($_SESSION['csrf_token']); ?>">
 
-                                                <button type="submit"
-                                                    style="background:#27ae60;color:white;padding:5px 10px;border:0;border-radius:4px;cursor:pointer;">
-                                                    Approve
-                                                </button>
+                                                    <textarea name="pre_condition"
+                                                        placeholder="Tool condition before rental"
+                                                        required
+                                                        style="width:100%; box-sizing:border-box; padding:6px; margin-bottom:5px;"></textarea>
 
-                                            </form>
+                                                    <button type="submit"
+                                                        style="width:100%; background:#27ae60; color:white; padding:7px 10px; border:0; border-radius:4px; cursor:pointer;">
+                                                        Approve
+                                                    </button>
 
-                                            <!-- DECLINE RENTAL -->
-                                            <form action="manage_rental.php" method="POST"
-                                                onsubmit="return confirm('Are you sure you want to decline this request?');">
+                                                </form>
 
-                                                <input type="hidden" name="id"
-                                                    value="<?= (int)$row['id']; ?>">
+                                                <!-- DECLINE RENTAL -->
+                                                <form action="manage_rental.php" method="POST"
+                                                    onsubmit="return confirm('Are you sure you want to decline this request?');"
+                                                    style="width:100%;">
 
-                                                <input type="hidden" name="action"
-                                                    value="decline">
+                                                    <input type="hidden" name="id"
+                                                        value="<?= (int)$row['id']; ?>">
 
-                                                <input type="hidden" name="csrf_token"
-                                                    value="<?= htmlspecialchars($_SESSION['csrf_token']); ?>">
+                                                    <input type="hidden" name="action"
+                                                        value="decline">
 
-                                                <button type="submit"
-                                                    style="background:#e74c3c;color:white;padding:5px 10px;border:0;border-radius:4px;cursor:pointer;">
-                                                    Decline
-                                                </button>
+                                                    <input type="hidden" name="csrf_token"
+                                                        value="<?= htmlspecialchars($_SESSION['csrf_token']); ?>">
 
-                                            </form>
+                                                    <button type="submit"
+                                                        style="width:100%; background:#e74c3c; color:white; padding:7px 10px; border:0; border-radius:4px; cursor:pointer;">
+                                                        Decline
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
 
 
                                         <?php elseif ($status === 'Approved' && $is_cash_pending): ?>
